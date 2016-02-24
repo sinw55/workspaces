@@ -9,7 +9,7 @@
  * with the terms and conditions stipulated in the agreement/contract
  * under which the software has been supplied.
  */
-package com.ge.pfh.evergreen.models;
+package com.ge.pfh.evergreen.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

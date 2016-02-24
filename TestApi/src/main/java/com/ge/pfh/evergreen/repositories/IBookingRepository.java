@@ -15,12 +15,12 @@ import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.ge.pfh.evergreen.models.Booking;
+import com.ge.pfh.evergreen.entities.Booking;
 
 /**
  * @author shinwoochung
  *
  */
-public interface BookingRepository extends JpaRepository<Booking, Long> {
+public interface IBookingRepository extends JpaRepository<Booking, Long> {
     Collection<Booking> findByBookingName(String bookingName);
 }
