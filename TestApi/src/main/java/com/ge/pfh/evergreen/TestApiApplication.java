@@ -1,10 +1,13 @@
 package com.ge.pfh.evergreen;
 
+import static springfox.documentation.builders.PathSelectors.regex;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 import com.ge.pfh.evergreen.entities.Booking;
@@ -15,8 +18,6 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import static springfox.documentation.builders.PathSelectors.regex;
 
 /*
  * @SpringBootApplication is a convenience annotation that adds all of the following:
@@ -34,6 +35,7 @@ import static springfox.documentation.builders.PathSelectors.regex;
  */
 @SpringBootApplication
 @EnableSwagger2 // Allows Swagger UI to be enabled
+@ComponentScan("com.ge.pfh.evergreen")
 public class TestApiApplication {
 
     public static void main(String[] args) {
