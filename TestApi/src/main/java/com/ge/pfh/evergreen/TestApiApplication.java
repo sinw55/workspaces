@@ -4,10 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import com.ge.pfh.evergreen.entities.Booking;
 import com.ge.pfh.evergreen.repositories.IBookingRepository;
+
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import static springfox.documentation.builders.PathSelectors.regex;
 
 /*
  * @SpringBootApplication is a convenience annotation that adds all of the following:
@@ -24,20 +33,30 @@ import com.ge.pfh.evergreen.repositories.IBookingRepository;
  * or were automatically added thanks to Spring Boot. It sorts them and prints them out.
  */
 @SpringBootApplication
+@EnableSwagger2 // Allows Swagger UI to be enabled
 public class TestApiApplication {
 
     public static void main(String[] args) {
         SpringApplication.run( TestApiApplication.class, args );
-        
-//        ApplicationContext ctx = SpringApplication.run( TestApiApplication.class, args );
-//        
-//        System.out.println( "Let's inspect the beans provided by Spring Boot." );
-//        
-//        String[] beanNames = ctx.getBeanDefinitionNames();
-//        Arrays.sort(beanNames);
-//        for (String beanName : beanNames) {
-//            System.out.println(beanName);
-//        }
+    }
+    
+    // Setting information on Swagger UI
+    @Bean
+    public Docket newsApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("Bookings")
+                .apiInfo(apiInfo())
+                .select()
+                .paths(regex("/bookings.*"))
+                .build();
+    }
+     
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .title("Test Api Project with Swagger")
+                .description("Test Api Project with Swagger")
+                .contact("Shinwoo Chung")
+                .build();
     }
 }
 

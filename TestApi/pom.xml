@@ -54,6 +54,21 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.3.1</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.3.1</version>
+            <scope>compile</scope>
+        </dependency>
+
 	</dependencies>
 
 	<build>
@@ -62,6 +77,45 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			
+			<!-- swagger plugin setting starts -->
+			<plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<plugin>
+			  	<groupId>com.github.kongchen</groupId>
+			  	<artifactId>swagger-maven-plugin</artifactId>
+			  	<version>3.1.2</version>
+			  	<executions>
+			    	<execution>
+			      		<id>generate-test-api-contract</id>
+			      		<phase>compile</phase>
+			      		<goals>
+			        		<goal>generate</goal>
+			      		</goals>
+			      		<configuration>
+			        		<apiSources>
+			          			<apiSource>
+			            			<springmvc>true</springmvc>
+			            			<schemes>http,https</schemes>
+			            			<host>localhost:8080</host>
+			            			<basePath>localhost:8080</basePath>
+			            			<info>
+			                  			<title>Test Api</title>
+			                  			<version>1.0</version>
+			            			</info>
+			            			<outputFormats>json,yaml</outputFormats>
+			            			<locations>com.ge.pfh.evergreen.controllers</locations>
+			            			<swaggerDirectory>${project.basedir}/bin/testapi</swaggerDirectory>
+			          			</apiSource>
+			        		</apiSources>
+			     		 </configuration>
+					</execution>
+			  	</executions>
+			</plugin>
+			<!-- swagger plugin setting ends -->
+			
 		</plugins>
 	</build>
 	
